@@ -1,0 +1,26 @@
+# Architecture
+
+```mermaid
+flowchart TD
+
+User["User Question"]
+Agent["LLM Agent (ReAct)"]
+MCP["MCP Server (Python)"]
+Tool["Tool: search_books"]
+Webhook["n8n Webhook API"]
+Wrapper["Workflow: api_search_books"]
+SearchWF["Workflow: search_calibre_book"]
+CSV["Calibre CSV Library"]
+
+User --> Agent
+Agent --> MCP
+MCP --> Tool
+Tool --> Webhook
+Webhook --> Wrapper
+Wrapper --> SearchWF
+SearchWF --> CSV
+CSV --> SearchWF
+SearchWF --> Wrapper
+Wrapper --> MCP
+MCP --> Agent
+Agent --> User
