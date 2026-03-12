@@ -1,29 +1,35 @@
-# AI Library Agent (MCP + n8n)
+# AI knihovní agent (MCP + n8n)
 
-AI agent pro vyhledávání knih v osobní knihovně exportované z **Calibre**.  
-Projekt demonstruje použití **LLM agenta**, **Model Context Protocol (MCP)** a **workflow nástroje n8n**.
+Tento projekt demonstruje vytvoření **AI agenta**, který dokáže vyhledávat knihy v osobní knihovně exportované z aplikace **Calibre**.
+
+Agent využívá:
+
+- **Model Context Protocol (MCP)** pro přístup k nástrojům
+- **OpenAI Agents SDK**
+- **n8n workflow** jako backend pro zpracování dat
+- **CSV databázi knih** exportovanou z Calibre
 
 Agent dokáže odpovídat na dotazy typu:
 
-- Find books by Woody Allen
-- Find book Nadace
-- Search books by author
+- Najdi knihy od Woody Allen
+- Najdi knihu Nadace
+- Najdi knihy podle autora
 
-a vrátí strukturovaný seznam knih.
+a vrací strukturovaný seznam knih.
 
 ---
 
-# Project Architecture
+# Architektura systému
 
-System architecture:
+Architektura řešení:
 
-User  
+Uživatel  
 ↓  
 LLM Agent (ReAct)  
 ↓  
 MCP Server (Python)  
 ↓  
-Tool: `search_books`  
+Nástroj: `search_books`  
 ↓  
 n8n Webhook API  
 ↓  
@@ -31,34 +37,36 @@ Workflow `api_search_books`
 ↓  
 Workflow `search_calibre_book`  
 ↓  
-Calibre CSV dataset  
+CSV databáze knih  
 
 ---
 
-# Technologies Used
+# Použité technologie
+
+Projekt využívá následující technologie:
 
 - Python
 - Model Context Protocol (MCP)
 - OpenAI Agents SDK
-- n8n
+- n8n (workflow automatizace)
 - HTTP API
-- CSV dataset (Calibre export)
+- CSV dataset (export z Calibre)
 
 ---
 
-# Architecture Diagram
+# Diagram architektury
 
 ```mermaid
 flowchart TD
 
-User["User Question"]
+User["Dotaz uživatele"]
 Agent["LLM Agent (ReAct)"]
 MCP["MCP Server (Python)"]
 Tool["Tool: search_books"]
 Webhook["n8n Webhook"]
 Wrapper["Workflow: api_search_books"]
 SearchWF["Workflow: search_calibre_book"]
-CSV["Calibre CSV Dataset"]
+CSV["CSV databáze Calibre"]
 
 User --> Agent
 Agent --> MCP
