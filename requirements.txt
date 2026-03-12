@@ -1,0 +1,7 @@
+mcp
+httpx
+uvicorn
+pydantic
+pydantic-settings
+python-dotenv
+openai-agents
